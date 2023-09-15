@@ -1,81 +1,191 @@
 <div class="container my-5">
-    <p class="fw-bold h6 my-0 text-secondary">START FOR FREE</p>
-    <h1 class="display-5 fw-bold text-white">
-        Create new account
-        <span class="text-primary fw-bolder display-4">.</span>
-    </h1>
-    <p class="h6 text-secondary">Already A Member? <a class="text-decoration-none" routerLink="/login">Log In</a></p>
-    <div class=" col-xl-6  col-md-10 col-sm-12 my-5">
-        <form id="form" #authForm="ngForm" (ngSubmit)="formOp(authForm)">
-            <span id="inValid" class="text-danger"></span>
-            <div class="col-11 d-flex justify-content-between">
-                <div class="col-5">
-                    <label for="firstName" class="col-sm-5 col-form-label fw-semibold">First Name</label>
-                    <input
-                        type="text"
-                        class="form-control rounded-4 py-3"
-                        id="firstName"
-                        placeholder="Enter First Name"
-                        ngModel name="firstName"
-                        required
-                    >
-                </div>
-                <div class="col-5">
-                    <label for="lastName" class="col-sm-5 col-form-label fw-semibold">Last Name</label>
-                    <input
-                        type="text"
-                        class="form-control rounded-4 py-3"
-                        id="lastName"
-                        placeholder="Enter Last Name"
-                        ngModel name="lastName"
-                        required
-                    >
-                </div>
-            </div>
-            <div class="col-11">
-                <label for="email" class="col-sm-5 col-form-label fw-semibold">Email</label>
-                <input
-                    type="email"
-                    class="form-control rounded-4 py-3"
-                    id="Email"
-                    placeholder="Enter Email"
-                    ngModel name="email"
-                    required
-                    email
-                >
-            </div>
-            <div class="col-11 ">
-                <label for="inputPassword" class="col-sm-5 col-form-label fw-semibold">Password</label>
-                <input
-                    type="password"
-                    class="form-control rounded-4 py-3"
-                    id="inputPassword"
-                    placeholder="Enter Password"
-                    ngModel name="inputPassword"
-                    required
-                    minlength="8"
-                    password
-                    pattern="^[1-9]+[0-9]*$"
-                >
-            </div>
-            <div class="col-11">
-                <label for="confirmPassword" class="col-sm-5 col-form-label fw-semibold">Confirm Password</label>
-                <input
-                    type="password"
-                    class="form-control rounded-4 py-3"
-                    id="confirmPassword"
-                    placeholder="Re-enter Password"
-                    ngModel name="confirmPassword"
-                    required
-                    minlength="8"
-                    password
-                    pattern="/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/"
-
-                >
-            </div>
-            <div class="col-11 justify-content-between d-flex my-4 px-4">
-                <a class="btn btn-secondary fw-bold col-5 my-3  py-3 rounded-pill px-2" routerLink="/login">Change Method</a>
-                <button class="btn btn-primary col-5 my-3 rounded-pill py-3 px-2 fw-bold" type="submit" id="signup" [disabled]="!authForm.valid">Create Account</button>
-            </div>
+  <p class="fw-bold h6 my-0 text-secondary">START FOR FREE</p>
+  <h1 class="display-5 fw-bold text-white">
+    Create new account
+    <span class="text-primary fw-bolder display-4">.</span>
+  </h1>
+  <p class="h6 text-secondary">
+    Already A Member?
+    <a class="text-decoration-none" routerLink="/login">Log In</a>
+  </p>
+  <div class="col-xl-6 col-md-10 col-sm-12 my-5">
+    <form #authForm="ngForm" (ngSubmit)="formOp(authForm)">
+      <span id="inValid" class="text-danger"></span>
+      <div class="col-11 d-flex justify-content-between">
+        <div class="col-5">
+          <div class="form-group" [class.has-error]="firstNameControl.invalid">
+            <label for="firstName" class="col-sm-5 col-form-label fw-semibold"
+              >First Name</label
+            >
+            <input
+              appHasNumber
+              type="text"
+              class="form-control rounded-4 py-3"
+              id="firstName"
+              placeholder="Enter First Name"
+              ngModel
+              name="firstName"
+              required
+              #firstNameControl="ngModel"
+            />
+          </div>
+          <span
+            class="small text-danger"
+            *ngIf="firstNameControl.invalid && firstNameControl.touched"
+          >
+            First Name is required
+          </span>
+          <!-- <span *ngIf="firstNameControl.invalid">Name should not have number</span> -->
+        </div>
+        <div class="col-5">
+          <div class="form-group" [class.has-error]="lastNameControl.invalid">
+            <label for="lastName" class="col-sm-5 col-form-label fw-semibold"
+              >Last Name</label
+            >
+            <input
+              appHasNumber
+              type="text"
+              class="form-control rounded-4 py-3"
+              id="lastName"
+              placeholder="Enter Last Name"
+              ngModel
+              name="lastName"
+              required
+              #lastNameControl="ngModel"
+            />
+          </div>
+          <span
+            class="small text-danger"
+            *ngIf="lastNameControl.invalid && lastNameControl.touched"
+          >
+            Last Name is required
+          </span>
+        </div>
+      </div>
+      <div class="col-11">
+        <div class="form-group" [class.has-error]="emailControl.invalid">
+          <label for="email" class="col-sm-5 col-form-label fw-semibold"
+            >Email</label
+          >
+          <input
+            type="email"
+            class="form-control rounded-4 py-3"
+            id="Email"
+            placeholder="Enter Email"
+            ngModel
+            name="email"
+            required
+            #emailControl="ngModel"
+            email
+          />
+        </div>
+        <span
+          class="small text-danger"
+          *ngIf="emailControl.invalid && emailControl.touched"
+        >
+          Email is required
+        </span>
+      </div>
+      <div class="col-11">
+        <div
+          class="form-group"
+          [class.has-error]="inputPasswordControl.invalid"
+        >
+          <label for="inputPassword" class="col-sm-5 col-form-label fw-semibold"
+            >Password</label
+          >
+          <span
+            class="tt"
+            title="A mixture of both uppercase and lowercase letters.
+A mixture of letters and numbers.
+Inclusion of at least one special character, e.g., ! @ # ? ]"
+            data-bs-placement="bottom"
+          >
+            <input
+              type="password"
+              class="form-control rounded-4 py-3"
+              id="inputPassword"
+              placeholder="Enter Password"
+              [(ngModel)]="inputPassword"
+              name="inputPassword"
+              required
+              minlength="8"
+              #inputPasswordControl="ngModel"
+              password
+              (ngModelChange)="passwordMatch()"
+          /></span>
+        </div>
+        <span
+          class="small text-danger"
+          *ngIf="inputPasswordControl.invalid && inputPasswordControl.touched"
+        >
+          Password should be atleast 8 chars long
+        </span>
+        <span
+          class="small text-danger"
+          *ngIf="!isValid && inputPasswordControl.valid"
+          >Password Should Match the criteria.</span
+        >
+      </div>
+      <div class="col-11">
+        <div
+          class="form-group"
+          [class.has-error]="confirmPasswordControl.invalid"
+        >
+          <label
+            for="confirmPassword"
+            class="col-sm-5 col-form-label fw-semibold"
+            >Confirm Password</label
+          >
+          <input
+            type="password"
+            class="form-control rounded-4 py-3"
+            id="confirmPassword"
+            placeholder="Re-enter Password"
+            [(ngModel)]="confirmPassword"
+            name="confirmPassword"
+            required
+            minlength="8"
+            #confirmPasswordControl="ngModel"
+            (ngModelChange)="passwordMatch()"
+          />
+        </div>
+        <span class="small text-danger" *ngIf="!ifMatched">
+          Both password should match
+        </span>
+        <span
+          class="small text-danger"
+          *ngIf="
+            confirmPasswordControl.invalid &&
+            confirmPasswordControl.touched &&
+            ifMatched
+          "
+        >
+          Confirm Password is required
+        </span>
+      </div>
+      <div class="col-11 justify-content-between d-flex my-4 px-4">
+        <a
+          class="btn btn-secondary fw-bold col-5 my-3 py-3 rounded-pill px-2"
+          routerLink="/login"
+          >Change Method</a
+        >
+      
+        <button
+          class="btn btn-primary col-5 my-3 rounded-pill py-3 px-2 fw-bold"
+          type="submit"
+          id="signup"
+          [disabled]="!authForm.valid || !isValid || !ifMatched"
+        >
+          Create Account
+        </button>
+        
+      </div>
     </form>
+    <a
+    class="btn btn-secondary fw-bold col-5 my-3 py-3 rounded-pill px-2"
+    routerLink="/signUpReactive"
+    >Change To Reactive</a
+  >
+  </div>
 </div>

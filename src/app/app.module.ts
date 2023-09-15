@@ -6,20 +6,25 @@ import { AppComponent } from './app.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { UserInfoComponent } from './user-info/user-info.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from './shared/auth.service';
+import { HasNumberDirective } from './shared/has-number.directive';
+import { SignupReactiveComponent } from './signup-reactive/signup-reactive.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignUpComponent,
     LoginPageComponent,
-    UserInfoComponent
+    UserInfoComponent,
+    HasNumberDirective,
+    SignupReactiveComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    ReactiveFormsModule
     
   ],
   providers: [],

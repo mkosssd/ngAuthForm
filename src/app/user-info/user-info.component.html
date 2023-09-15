@@ -6,12 +6,15 @@
     
     <div class=" col-xl-6 col-md-8 col-sm-10  rounded py-3 mt-5 fw-bold" id="userDetail">
         <div class="card py-4 px-3">
+            <div *ngIf="user">
 
-            <div id="name"></div>
-            
-            <div id="mail"></div>
+                <p class="display-6 fw-semibold">{{name}}</p>
+                
+                    <p class="h4 fw-semibold">{{mail}}</p>
+            </div>
+            <div *ngIf="!user">User not logged in. Redirecting....</div>
         </div>
     </div>
-    <div id="logout" class="my-0  col-3 "></div>
+    <div id="logout" *ngIf="user" class="my-0  col-3 "><button class="btn btn-primary rounded-pill py-3 px-2 fw-bold col-12" (click)="logout()">Logout</button> </div>
     
 </div>
